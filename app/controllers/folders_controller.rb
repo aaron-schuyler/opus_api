@@ -15,6 +15,9 @@ class FoldersController < ApplicationController
     save_folder folder
   end
   def destroy
+    folder = Folder.find_by(id: params[:id], user: current_user)
+    Folder.destroy(folder.id)
+    render json: {folder: folder}
   end
   private
   def folder_params

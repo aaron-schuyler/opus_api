@@ -17,7 +17,7 @@ class FoldersController < ApplicationController
   def destroy
     folder = Folder.find_by(id: params[:id], user: current_user)
     Folder.destroy(folder.id)
-    render json: {folder: folder}
+    render json: {success: true, message: "Folder: '#{folder.name}' deleted successfuly."}
   end
   private
   def folder_params
@@ -26,7 +26,7 @@ class FoldersController < ApplicationController
   def save_folder(folder)
     if folder.valid?
       folder.save
-      render json: {success: true, message: "Folder '#{folder.name}' saved successfuly."}
+      render json: {success: true, message: "Folder: '#{folder.name}' saved successfuly."}
     else
       render json: {success: false, messages: folder.errors.full_messages}
     end

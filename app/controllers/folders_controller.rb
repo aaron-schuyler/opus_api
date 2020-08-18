@@ -6,9 +6,20 @@ class FoldersController < ApplicationController
     @folder = Folder.find_by(id: params[:id], user: current_user)
   end
   def create
+    folder = current_user.folders.new(folder_params)
+    if folder.valid?
+      folder.save
+      render json: {success: true, message: "Folder '#{folder.name}' saved successfuly."}
+    else
+      render json: {success: false, messages: folder.errors.full_messages}
+    end
   end
   def update
   end
   def destroy
+  end
+  private
+  def folder_params
+    params.require(:folder).permit(:name, :color)
   end
 end

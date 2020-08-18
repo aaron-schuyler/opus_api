@@ -3,14 +3,14 @@ class FoldersController < ApplicationController
     @folders = current_user.folders.all
   end
   def show
-    @folder = Folder.find_by(id: params[:id], user: current_user)
+    @folder = find_folder
   end
   def create
     folder = current_user.folders.new(folder_params)
     save_folder folder
   end
   def update
-    folder = Folder.find_by(id: params[:id], user: current_user)
+    folder = find_folder
     folder.assign_attributes(folder_params)
     save_folder folder
   end
@@ -22,6 +22,14 @@ class FoldersController < ApplicationController
   private
   def folder_params
     params.require(:folder).permit(:name, :color)
+  end
+  def find_folder
+    folder = Folder.find_by(id: params[:id], user: current_user)
+    if !!folder
+      folder
+    else
+      render json: {message: 'Folder not found'}, status: :not_found
+    end
   end
   def save_folder(folder)
     if folder.valid?

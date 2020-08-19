@@ -6,8 +6,7 @@ class FoldersController < ApplicationController
     @folder = find_folder
   end
   def create
-    folder = current_user.folders.new(folder_params)
-    save_folder folder
+    save_folder current_user.folders.new(folder_params)
   end
   def update
     folder = find_folder

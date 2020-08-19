@@ -9,8 +9,18 @@ class DocsController < ApplicationController
     save_doc current_user.docs.new(doc_params)
   end
   def update
+    doc = find_doc
+    doc.assign_attributes(doc_params)
+    save_doc doc
   end
   def destroy
+    doc = Doc.find_by(id: params[:id], user: current_user)
+    if !!doc
+      Doc.destroy(doc.id)
+      render json: {success: true, message: "Doc: '#{doc.name}' deleted successfuly."}
+    else
+      render json: {message: "This isn't yours! O.o"}, status: :unauthorized
+    end
   end
   private
   def doc_params

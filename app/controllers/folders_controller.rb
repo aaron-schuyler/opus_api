@@ -15,8 +15,12 @@ class FoldersController < ApplicationController
   end
   def destroy
     folder = Folder.find_by(id: params[:id], user: current_user)
-    Folder.destroy(folder.id)
-    render json: {success: true, message: "Folder: '#{folder.name}' deleted successfuly."}
+    if !!folder
+      Folder.destroy(folder.id)
+      render json: {success: true, message: "Folder: '#{folder.name}' deleted successfuly."}
+    else
+      render json: {message: "This isn't yours! O.o"}, status: :unauthorized
+    end
   end
   private
   def folder_params

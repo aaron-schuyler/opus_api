@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
+  get '/check_session', to: 'sessions#check_session'
   delete '/logout', to: 'sessions#destroy'
   resources :docs, only: [:index, :show, :create, :update, :destroy]
   post 'docs/:id/share/:user_id', to: 'shares#create'

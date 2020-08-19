@@ -9,6 +9,14 @@ class SessionsController < ApplicationController
       render json: {error: "Invalid username or password"}
     end
   end
+  def check_session
+    user = current_user
+    if !!user
+      render json: {loggedIn: true}
+    else
+      render json: {loggedIn: true}
+    end
+  end
   def destroy
     cookies.delete :jwt
   end

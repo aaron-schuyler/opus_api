@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
     rescue
       render json: {success: false}
     end
-    render json: {sucess: true} if !!user
+    render json: {success: true} if !!user
   end
   def destroy
     cookies.delete :jwt

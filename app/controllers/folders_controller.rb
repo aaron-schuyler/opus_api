@@ -37,7 +37,7 @@ class FoldersController < ApplicationController
   def save_folder(folder)
     if folder.valid?
       folder.save
-      render json: {success: true, message: "Folder: '#{folder.name}' saved successfuly."}
+      render json: {success: true, folder: folder}
     else
       render json: {success: false, messages: folder.errors.full_messages}
     end

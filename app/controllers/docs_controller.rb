@@ -9,6 +9,7 @@ class DocsController < ApplicationController
     save_doc current_user.docs.new(doc_params)
   end
   def update
+
     doc = find_doc
     doc.assign_attributes(doc_params)
     save_doc doc
@@ -24,7 +25,7 @@ class DocsController < ApplicationController
   end
   private
   def doc_params
-    params.require(:doc).permit(:name, :body, :shared, :folder_id)
+    params.require(:doc).permit(:name, :shared, :folder_id, :exerp, :body => {})
   end
   def find_doc
     doc = Doc.find_by(id: params[:id])

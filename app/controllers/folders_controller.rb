@@ -10,8 +10,8 @@ class FoldersController < ApplicationController
   end
   def update
     folder = find_folder
-    folder.assign_attributes(folder_params)
-    save_folder folder
+    folder.assign_attributes(folder_params) if folder
+    save_folder folder if folder
   end
   def destroy
     folder = Folder.find_by(id: params[:id], user: current_user)
@@ -32,6 +32,7 @@ class FoldersController < ApplicationController
       folder
     else
       render json: {message: 'Folder not found'}, status: :not_found
+      false
     end
   end
   def save_folder(folder)

@@ -51,7 +51,7 @@ class DocsController < ApplicationController
   def save_doc(doc)
     if doc.valid?
       doc.save
-      render json: {success: true, message: "Doc: '#{doc.name}' saved successfully."}
+      render json: {success: true, doc: doc}
     else
       render json: {success: false, messages: doc.errors.full_messages}
     end

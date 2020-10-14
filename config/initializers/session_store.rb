@@ -1,1 +1,1 @@
-Rails.application.config.session_store :cookie_store, key: '_opus_session', domain: ENV['CLIENT_URL']
+Rails.application.config.session_store :cookie_store, key: '_opus_session', domain: 'netlify.app'

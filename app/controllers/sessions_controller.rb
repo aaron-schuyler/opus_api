@@ -4,9 +4,9 @@ class SessionsController < ApplicationController
     if user.try(:authenticate, params[:password])
       token = JsonWebToken.encode({user_id: user.id})
       cookies.signed[:jwt] = {value: token, httponly: true}
-      render json: {success: true}
+      render json: {success: true, jwt: cookies.signed[:jwt]}
     else
-      render json: {sucess: false, error: "Invalid username or password"}
+      render json: {success: false, error: "Invalid username or password"}
     end
   end
   def check_session

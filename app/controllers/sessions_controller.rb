@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
     user = User.find_by(username: params[:username])
     if user.try(:authenticate, params[:password])
       token = JsonWebToken.encode({user_id: user.id})
-      cookies.signed[:jwt] = {value: token, httponly: true, secure: true}
+      cookies.signed[:jwt] = {value: token, httponly: true}
       render json: {success: true, jwt: cookies.signed[:jwt]}
     else
       render json: {success: false, error: "Invalid username or password"}

@@ -21,7 +21,7 @@ gem 'jwt'
 
 gem 'dotenv-rails'
 
-
+gem 'rails_same_site_cookie'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
